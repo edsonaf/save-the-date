@@ -30,7 +30,7 @@ jobs:
 
         - name: Run deploy script
           run: |
-            git config user.name "edsonaf" && git config user.email "edsonaf@users.noreply.github.com"
+            git config user.name "edsonaf" && git config user.email "edsonsintjago@gmail.com"
             git checkout --orphan gh-pages
             git --work-tree build add --all
             git --work-tree build commit -m 'Deploy'
