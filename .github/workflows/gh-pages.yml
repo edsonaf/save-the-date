@@ -1,0 +1,37 @@
+name: Deploy to github pages
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**/README.*md'
+      - '**/.gitignore'
+
+jobs:
+    gh-pages-deploy:
+      name: Deploying to gh-pages
+      runs-on: ubuntu-latest
+      steps:
+        - name: Setup Node.js
+          uses: actions/setup-node@v1
+          with:
+            version:  12.x
+        - name: Checkout branch
+          uses: actions/checkout@v2
+
+        - name: Install dependencies (npm ci)
+          run: npm ci
+    
+        - name: Build
+          run: npm run build
+          env:
+            CI: false
+
+        - name: Run deploy script
+          run: |
+            git config user.name "edsonaf" && git config user.email "edsonaf@users.noreply.github.com"
+            git checkout --orphan gh-pages
+            git --work-tree build add --all
+            git --work-tree build commit -m 'Deploy'
+            git push origin HEAD:gh-pages --force
