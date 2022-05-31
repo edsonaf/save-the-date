@@ -1,0 +1,99 @@
+.save-the-date-container {
+  width: 850px;
+  padding: 3%;
+  background: linear-gradient(
+    to left,
+    var(--cosmos) 25%,
+    var(--periwinkle) 75%
+  );
+  // transition: "all 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 0s";
+  border-radius: 3%;
+  .top {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .left {
+      align-items: flex-start;
+      justify-content: flex-start;
+      width: max-content;
+
+      ul.dash {
+        list-style: none;
+        margin-left: 0;
+        padding-left: 1em;
+        min-width: 400px;
+      }
+      ul.dash > div > li:before {
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+      }
+
+      ul > div {
+        p {
+          font-size: small;
+          font-style: italic;
+        }
+      }
+
+      ul > div.song-item {
+        border-radius: 4%;
+
+        &:hover {
+          background-color: var(--cosmos);
+          cursor: pointer;
+        }
+      }
+
+      ul > div.song-item.selected {
+        list-style: outside;
+      }
+    }
+
+    .right {
+      display: flex;
+      right: 0;
+      align-items: center;
+      justify-content: center;
+      height: 380px;
+      width: 380px;
+      background-color: transparent;
+      .image-right {
+        justify-self: center;
+        height: 100%;
+        width: 100%;
+        background-image: url("./qrcode.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        border-radius: 5%;
+      }
+    }
+  }
+
+  .bot {
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+    .track-time {
+      display: flex;
+      justify-content: space-between;
+    }
+    .buttons {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+
+      svg {
+        cursor: pointer;
+        font-size: 5rem;
+      }
+    }
+  }
+}
+
+:root {
+  --cosmos: rgb(255, 214, 214);
+  --periwinkle: rgb(208, 221, 255);
+}
