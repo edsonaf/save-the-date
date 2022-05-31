@@ -16,7 +16,7 @@ import { Stack } from "@mui/material";
 
 const SaveTheDate = () => {
   const [trackIndex, setTrackIndex] = useState(0);
-
+  const [userInteracted, setUserInteracted] = useState(false);
   const audioRef = useRef(
     new Audio(process.env.PUBLIC_URL + Playlist[trackIndex].link)
   );
@@ -36,28 +36,28 @@ const SaveTheDate = () => {
   };
 
   const handleSelectedSong = (newValue) => {
+    setUserInteracted(true);
     setTrackIndex(newValue);
   };
 
   const toPrevTrack = () => {
     if (trackIndex - 1 < 0) {
-      setTrackIndex(Playlist.length - 1);
+      handleSelectedSong(Playlist.length - 1);
     } else {
-      setTrackIndex(trackIndex - 1);
+      handleSelectedSong(trackIndex - 1);
     }
   };
 
   const toNextTrack = () => {
     if (trackIndex < Playlist.length - 1) {
-      setTrackIndex(trackIndex + 1);
+      handleSelectedSong(trackIndex + 1);
     } else {
-      setTrackIndex(0);
+      handleSelectedSong(0);
     }
   };
 
   const startTimer = () => {
     // Clear any timers already running
-    console.log('startTimer');
     clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
       if (audioRef.current.ended) {
@@ -110,7 +110,7 @@ const SaveTheDate = () => {
     audioRef.current.volume = volume;
     setTrackProgress(audioRef.current.currentTime);
 
-    if (isReady.current) {
+    if (isReady.current && userInteracted) {
       audioRef.current.play();
       setIsPlaying(true);
       startTimer();
