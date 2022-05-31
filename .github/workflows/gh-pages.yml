@@ -16,7 +16,7 @@ jobs:
         - name: Setup Node.js
           uses: actions/setup-node@v1
           with:
-            version:  12.x
+            version:  14.x
         - name: Checkout branch
           uses: actions/checkout@v2
 
@@ -30,7 +30,7 @@ jobs:
 
         - name: Run deploy script
           run: |
-            git config user.name "edsonaf" && git config user.email "edsonsintjago@gmail.com"
+            git config user.name "edsonaf" && git config user.email "edsonaf@users.noreply.github.com"
             git checkout --orphan gh-pages
             git --work-tree build add --all
             git --work-tree build commit -m 'Deploy'
